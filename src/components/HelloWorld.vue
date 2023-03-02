@@ -1,23 +1,30 @@
 <template>
   <div id="hw">
     <header>
-      <h1>Welcome to Opportunity</h1>
-      <h2>08.08.2021</h2>
+      <h1> {{ titel }} </h1>
+      <h2>{{ currDate }}</h2>
     </header>
     <section>
-      <ul>
+      <ul v-for="(kurs, index) in kurse" :key="index">
         <li>
-          <span id="kurs-time">14:00 Uhr</span><br>
-          <h3 id="kurs-titel">Basisbeschaftigung Besuch</h3>
-          <span id="kurs-desciption">intressierte für den zweiten Kurs werden uns besuchen</span>
-        </li>
-        <li>
-          <span id="kurs-time">16:20 Uhr</span><br>
-          <h3 id="kurs-titel">Basisbeschaftigung Besuch</h3>
-          <span id="kurs-desciption">intressierte für den zweiten Kurs werden uns besuchen</span>
+          <span id="kurs-time">{{ kurs[0] }}</span><br>
+          <h3 id="kurs-titel">{{ kurs[1] }}</h3>
+          <span id="kurs-desciption">{{ kurs[2] }}</span>
         </li>
       </ul>
     </section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <footer>
       <div class="footer-wrapper">
         <div class="footer-item">
@@ -35,9 +42,76 @@
 </template>
 
 <script>
-export default {
 
-}
+export default {
+  data() {
+    return {
+      titel: 'Welcome to Opportunity',
+      currDate: '00.00.1234',
+      kurse: [
+        ['1', '2', '3'],
+        ['a', 'b', 'c']
+      ]
+    }
+  },
+  methods: {
+    getData() {
+      this.kurse = [
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+      ]
+    },
+    currentDate() {
+      const current = new Date();
+      const d = current.getDate();
+      const m = current.getMonth() + 1;
+      const year = current.getFullYear();
+      const min = current.getMinutes();
+      const h = current.getHours();
+
+
+      let day;
+      let month;
+      let minuten;
+      let stunden;
+
+      if (d < 10) {
+        day = '0' + d;
+      } else {
+        day = d;
+      }
+      if (m < 10) {
+        month = '0' + m;
+      } else {
+        month = m;
+      }
+      if (min < 10) {
+        minuten = '0' + min;
+      } else {
+        minuten = min;
+      }
+      if (h < 10) {
+        stunden = '0' + h;
+      } else {
+        stunden = h;
+      }
+
+      this.currDate = day + '.' + month + '.' + year + ' - ' + stunden + ':' + minuten;
+    },
+    refreshData() {
+      this.getData();
+      this.currentDate();
+    }
+  },
+  mounted() {
+    this.refreshData();
+    setInterval(this.refreshData, 1000);
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -129,4 +203,5 @@ footer {
 
 .footer-item img {
   max-width: 100%;
-}</style>
+}
+</style>
