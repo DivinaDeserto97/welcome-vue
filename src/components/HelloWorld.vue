@@ -12,6 +12,7 @@
           <span id="kurs-desciption">{{ kurs[3] }}</span>
         </li>
       </ul>
+      <h4 v-else>Keine Kurse finden Stadt</h4>
     </section>
     <br>
     <br>
@@ -48,18 +49,15 @@ export default {
     return {
       titel: 'Welcome to Opportunity',
       currDate: '00.00.1234',
-      kurse: [
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd']
-      ]
+      kurse: [],
     }
   },
   methods: {
     getData() {
-      this.kurse = null,/* [
+      this.kurse = [
         ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
         ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-      ] */
+      ]
     },
     currentDate() {
       const current = new Date();
@@ -141,6 +139,15 @@ h2 {
   font-size: 62px;
 
   color: #9AA7B1;
+}
+
+h4 {
+  margin-left: 60px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 62px;
+
+  color: #0F05A0;
 }
 
 ul {
