@@ -7,9 +7,9 @@
     <section>
       <ul v-for="(kurs, index) in kurse" :key="index">
         <li>
-          <span id="kurs-time">{{ kurs[0] }}</span><br>
-          <h3 id="kurs-titel">{{ kurs[1] }}</h3>
-          <span id="kurs-desciption">{{ kurs[2] }}</span>
+          <span id="kurs-time">{{ kurs[0] }} Uhr</span><br>
+          <h3 id="kurs-titel">{{ kurs[2] }}</h3>
+          <span id="kurs-desciption">{{ kurs[3] }}</span>
         </li>
       </ul>
     </section>
@@ -49,20 +49,16 @@ export default {
       titel: 'Welcome to Opportunity',
       currDate: '00.00.1234',
       kurse: [
-        ['1', '2', '3'],
-        ['a', 'b', 'c']
+        ['1', '2', '3', '4'],
+        ['a', 'b', 'c', 'd']
       ]
     }
   },
   methods: {
     getData() {
       this.kurse = [
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00 Uhr', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
+        ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
       ]
     },
     currentDate() {
@@ -140,9 +136,7 @@ h1 {
 
 h2 {
   margin-left: 60px;
-
   text-align: left;
-
   font-weight: 500;
   font-size: 62px;
 
