@@ -7,7 +7,7 @@
     <section>
       <ul v-for="(kurs, index) in kurse" :key="index">
         <li>
-          <span id="kurs-time">{{ kurs[0] }} Uhr</span><br>
+          <span id="kurs-time">{{ kurs[1] }} - {{ kurs[0] }} Uhr</span><br>
           <h3 id="kurs-titel">{{ kurs[2] }}</h3>
           <span id="kurs-desciption">{{ kurs[3] }}</span>
         </li>
