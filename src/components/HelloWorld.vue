@@ -14,18 +14,20 @@
       </ul>
       <h4 v-else>Keine Kurse finden Stadt</h4>
     </section>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
     <footer>
       <div class="footer-wrapper">
         <div class="footer-item">
@@ -43,6 +45,7 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   data() {
@@ -50,14 +53,19 @@ export default {
       titel: 'Welcome to Opportunity',
       currDate: '',
       kurse: [],
+      sheet_id: "",
+      api_token: "AIzaSyA-qeDXOhEeQDA0vQf7LgkF7DQtGnAtmAU",
+    }
+  },
+  computed: {
+    gsheet_url() {
+      return `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values:batchGet?ranges=A1%3AE100&valueRenderOption=FORMATTED_VALUE&key=${this.api_token}`;
     }
   },
   methods: {
     getData() {
-      this.kurse = [
-        ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-        ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-      ]
+      this.kurse = axios;
+      console.log(axios);
     },
     currentDate() {
       const current = new Date();
