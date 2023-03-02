@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       titel: 'Welcome to Opportunity',
-      currDate: '00.00.1234',
+      currDate: '',
       kurse: [],
     }
   },
