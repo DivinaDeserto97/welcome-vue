@@ -5,8 +5,8 @@
       <h2>{{ currDate }}</h2>
     </header>
     <section>
-      <ul v-for="(kurs, index) in kurse" :key="index">
-        <li>
+      <ul v-if="kurse">
+        <li v-for="kurs in kurse" :key="kurs.id">
           <span id="kurs-time">{{ kurs[1] }} - {{ kurs[0] }} Uhr</span><br>
           <h3 id="kurs-titel">{{ kurs[2] }}</h3>
           <span id="kurs-desciption">{{ kurs[3] }}</span>
@@ -56,10 +56,10 @@ export default {
   },
   methods: {
     getData() {
-      this.kurse = [
+      this.kurse = null,/* [
         ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
         ['14:00', '0.1.2030', 'Basisbeschaftigung Besuch', 'intressierte für den zweiten Kurs werden uns besuchen'],
-      ]
+      ] */
     },
     currentDate() {
       const current = new Date();
