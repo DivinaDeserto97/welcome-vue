@@ -5,9 +5,9 @@
       <h2>{{ currDate }}</h2>
     </header>
     <section>
-      <ul v-if="kurse">
+      <ul v-if="kurse && kurse.length">
         <li v-for="kurs in kurse" :key="kurs.id">
-          <span id="kurs-time">{{ kurs[1] }} - {{ kurs[0] }} Uhr</span><br>
+          <span id="kurs-time">{{ kurs[0] }} Uhr, {{ kurs[1].replaceAll("/", ".")}}</span><br>
           <h3 id="kurs-titel">{{ kurs[2] }}</h3>
           <span id="kurs-desciption">{{ kurs[3] }}</span>
         </li>
@@ -53,19 +53,26 @@ export default {
       titel: 'Welcome to Opportunity',
       currDate: '',
       kurse: [],
-      sheet_id: "",
+      sheet_id: "1CR1UKN0LAPNs6lWbfA2gBI2FazmWdVSFIzIwi5TG5Z4",
       api_token: "AIzaSyA-qeDXOhEeQDA0vQf7LgkF7DQtGnAtmAU",
     }
   },
   computed: {
+    // computed properties are like data properties, but with a method combined and it gets executed automatically, instead of calling a function explicitly
     gsheet_url() {
-      return `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values:batchGet?ranges=A1%3AE100&valueRenderOption=FORMATTED_VALUE&key=${this.api_token}`;
-    }
+      return `https://sheets.googleapis.com/v4/spreadsheets/${this.sheet_id}/values:batchGet?ranges=A2%3AE100&valueRenderOption=FORMATTED_VALUE&key=${this.api_token}`;
+    },
   },
   methods: {
     getData() {
-      this.kurse = axios;
-      console.log(axios);
+       axios.get(this.gsheet_url).then((response) => {
+        this.kurse = response.data.valueRanges[0].values;
+       });
+      /*this.kurse = [
+        ["14:00", "01.02.2012", "Kurs1", "beschreibung1"],
+        ["14:00", "01.02.2012", "Kurs2", "beschreibung1"],
+        ["14:00", "01.02.2012", "Kurs3", "beschreibung1"],
+      ],*/
     },
     currentDate() {
       const current = new Date();
@@ -111,7 +118,7 @@ export default {
   },
   mounted() {
     this.refreshData();
-    setInterval(this.refreshData, 1000);
+    setInterval(this.refreshData, 18000000);
   }
 };
 </script>
@@ -135,7 +142,7 @@ h1 {
   text-align: left;
   font-weight: 900;
   font-size: 62px;
-  left: 60px;
+  left: 80px 0 20px 0;
 
   color: #323D4A;
 }
@@ -147,6 +154,7 @@ h2 {
   font-size: 62px;
 
   color: #9AA7B1;
+
 }
 
 h4 {
@@ -163,15 +171,12 @@ ul {
 }
 
 li {
-  width: 900px;
-  height: 112px;
-
-  padding: 37px;
-  margin: 20px;
+  padding: 37px 40px;
+  margin: 40px 0;
 
   font-weight: 900;
   font-size: 28px;
-  line-height: 10px;
+  line-height: 1.3;
 
   text-align: left;
   background-color: #0F05A0;
@@ -202,7 +207,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .footer-item {
