@@ -5,14 +5,17 @@
       <h2>{{ currDate }}</h2>
     </header>
     <section>
-      <ul v-if="kurse && kurse.length">
-        <li v-for="kurs in kurse" :key="kurs.id">
-          <span id="kurs-time">{{ kurs[0] }} Uhr, {{ kurs[1].replaceAll("/", ".")}}</span><br>
-          <h3 id="kurs-titel">{{ kurs[2] }}</h3>
-          <span id="kurs-desciption">{{ kurs[3] }}</span>
-        </li>
-      </ul>
-      <h4 v-else>Keine Kurse finden Stadt</h4>
+
+        <ul v-if="kurse && kurse.length">
+          <li v-for="kurs in kurse" :key="kurs.id">
+
+            <span id="kurs-time">{{ kurs[0] }} Uhr, {{ kurs[1].replaceAll("/", ".") }}</span><br>
+            <h3 id="kurs-titel">{{ kurs[2] }}</h3>
+            <span id="kurs-desciption">{{ kurs[3] }}</span>
+
+          </li>
+        </ul>
+
     </section>
     <div>
       <br>
@@ -53,8 +56,8 @@ export default {
       titel: 'Welcome to Opportunity',
       currDate: '',
       kurse: [],
-      sheet_id: "1CR1UKN0LAPNs6lWbfA2gBI2FazmWdVSFIzIwi5TG5Z4",
-      api_token: "AIzaSyA-qeDXOhEeQDA0vQf7LgkF7DQtGnAtmAU",
+      sheet_id: "1lXd4Bc_SZcN-UfVhg9eBiLQ2VyXGkQ-rxjsbnIbKwqQ",// Chris 1CR1UKN0LAPNs6lWbfA2gBI2FazmWdVSFIzIwi5TG5Z4
+      api_token: "AIzaSyBGazIHrv6U6W3nIx-B4TMXW3puAi6DNrY",// Chris AIzaSyA-qeDXOhEeQDA0vQf7LgkF7DQtGnAtmAU
     }
   },
   computed: {
@@ -65,9 +68,33 @@ export default {
   },
   methods: {
     getData() {
-       axios.get(this.gsheet_url).then((response) => {
-        this.kurse = response.data.valueRanges[0].values;
-       });
+      axios.get(this.gsheet_url).then((response) => {
+            // Erhalte die Zeilen aus der Antwort des API-Aufrufs
+            const rows = response.data.valueRanges[0].values;
+            // Erhalte das aktuelle Datum
+            const currentDate = new Date();
+            // Filtere die Zeilen, die ein Datum haben, das heute oder später ist
+            const filteredRows = rows.filter(row => {
+              // Zerlege das Datum in seine Teile
+              const dateParts = row[1].split("/");
+              // Erstelle ein neues Datum aus den Datumsteilen
+              const rowDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
+              // Vergleiche das neue Datum mit dem aktuellen Datum und gib das Ergebnis zurück
+              return rowDate >= currentDate;
+            });
+             // Sortiere die gefilterten Zeilen nach Datum
+            this.kurse = filteredRows.sort((row1, row2) => {
+              // Zerlege die Datumsteile des ersten Datums (uhr Zeit)in row1
+              const dateParts1 = row1[1].split("/");
+              // Zerlege die Datumsteile des zweiten Datums (Kalender) in row2
+              const dateParts2 = row2[1].split("/");
+              // Erstelle neue Datumobjekte aus den Datumsteilen beider Zeilen
+              const date1 = new Date(`${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`);
+              const date2 = new Date(`${dateParts2[2]}-${dateParts2[1]}-${dateParts2[0]}`);
+              // Vergleiche die Datumobjekte und gib das Ergebnis zurück
+              return date1 - date2;
+            });
+          });
       /*this.kurse = [
         ["14:00", "01.02.2012", "Kurs1", "beschreibung1"],
         ["14:00", "01.02.2012", "Kurs2", "beschreibung1"],
@@ -81,7 +108,6 @@ export default {
       const year = current.getFullYear();
       const min = current.getMinutes();
       const h = current.getHours();
-
 
       let day;
       let month;
