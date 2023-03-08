@@ -16,6 +16,7 @@
           </li>
         </ul>
 
+        <h4 v-else>Zur Zeit Keine Events vorhanden</h4>
     </section>
     <div>
       <br>
