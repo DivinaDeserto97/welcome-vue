@@ -8,11 +8,9 @@
 
         <ul v-if="kurse && kurse.length">
           <li v-for="kurs in kurse" :key="kurs.id">
-
             <span id="kurs-time">{{ kurs[0] }} Uhr, {{ kurs[1].replaceAll("/", ".") }}</span><br>
             <h3 id="kurs-titel">{{ kurs[2] }}</h3>
             <span id="kurs-desciption">{{ kurs[3] }}</span>
-
           </li>
         </ul>
 
