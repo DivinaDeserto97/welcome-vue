@@ -108,6 +108,14 @@ Simplonline - Kurze Details
 
 ### Liefergegenstände
 
-* Github-Repository
+* Github-Repository:
+https://github.com/DivinaDeserto97/welcome-vue.git
 
-* Nextlifx Link
+* Nextlifx Link:
+https://dreamy-fairy-97086d.netlify.app/
+
+## Repo
+
+Positiv war das ich viel gelernt habe vom projekt.
+
+Stressig War das ich noch 2 tage gefehlt habe hatte ich keine zeit einige dinge zu überarneiten zum beispiel die kurse nimmt nur die Das datum gefiltert und nicht die zeit.
