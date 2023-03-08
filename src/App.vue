@@ -1,9 +1,9 @@
 <template>
-  <list />
+  <HelloWorld />
 </template>
 
 <script>
-import list from './components/List.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
